@@ -1,0 +1,37 @@
+[env]
+TERM = "xterm-256color"
+
+[general]
+import = ["/home/zard/.config/alacritty/themes/themes/catppuccin-mocha.toml"]
+
+[font]
+size = 8.0
+
+[font.bold]
+family = "MesloLGS Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "MesloLGS Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "MesloLGS Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "MesloLGS Nerd Font Mono"
+style = "Regular"
+
+[window]
+opacity = 0.8
+padding.x = 10
+padding.y = 10
+blur = true
+
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+
+
