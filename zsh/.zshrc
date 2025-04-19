@@ -60,7 +60,7 @@ eval "$(zoxide init zsh)"
 
 alias cd="z"
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/scripts:$PATH"
 
 eval $(thefuck --alias fkit)
 
