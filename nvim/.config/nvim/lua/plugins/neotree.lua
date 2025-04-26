@@ -14,10 +14,10 @@ return {
 				filtered_items = {
 					visible = true,
 					hide_dotfiles = false,
-					gide_gitignored = false,
-					hide_by_name = {
-						--"node_modules"
-					},
+					hide_gitignored = false,
+					never_show = {
+						"node_modules"
+					}
 				}
 			}
 		})
