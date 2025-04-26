@@ -1,6 +1,7 @@
 return {
 	{
 		"williamboman/mason.nvim",
+		lazy = false,
 		config = function()
 			require("mason").setup()
 		end
@@ -43,33 +44,86 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.awk_ls.setup({})
-			lspconfig.bashls.setup({})
-			lspconfig.ast_grep.setup({})
-			lspconfig.clangd.setup({})
-			lspconfig.harper_ls.setup({})
-			lspconfig.css_variables.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.cssmodules_ls.setup({})
-			lspconfig.tailwindcss.setup({})
-			lspconfig.unocss.setup({})
-			lspconfig.docker_compose_language_service.setup({})
-			lspconfig.dockerls.setup({})
-			lspconfig.html.setup({})
-			lspconfig.lwc_ls.setup({})
-			lspconfig.superhtml.setup({})
-			lspconfig.eslint.setup({})
-			lspconfig.biome.setup({})
-			lspconfig.ts_ls.setup({})
-			lspconfig.jsonls.setup({})
-			lspconfig.ruff.setup({})
-			lspconfig.sqlls.setup({})
-			lspconfig.sqls.setup({})
-			lspconfig.vimls.setup({})
-			lspconfig.hydra_lsp.setup({})
-			lspconfig.yamlls.setup({})
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.awk_ls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.bashls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.ast_grep.setup({
+				capabilities = capabilities
+			})
+			lspconfig.clangd.setup({
+				capabilities = capabilities
+			})
+			lspconfig.harper_ls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.css_variables.setup({
+				capabilities = capabilities
+			})
+			lspconfig.cssls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.cssmodules_ls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.tailwindcss.setup({
+				capabilities = capabilities
+			})
+			lspconfig.unocss.setup({
+				capabilities = capabilities
+			})
+			lspconfig.docker_compose_language_service.setup({
+				capabilities = capabilities
+			})
+			lspconfig.dockerls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.html.setup({
+				capabilities = capabilities
+			})
+			lspconfig.lwc_ls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.superhtml.setup({
+				capabilities = capabilities
+			})
+			lspconfig.eslint.setup({
+				capabilities = capabilities
+			})
+			lspconfig.biome.setup({
+				capabilities = capabilities
+			})
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.jsonls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.ruff.setup({
+				capabilities = capabilities
+			})
+			lspconfig.sqlls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.sqls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.vimls.setup({
+				capabilities = capabilities
+			})
+			lspconfig.hydra_lsp.setup({
+				capabilities = capabilities
+			})
+			lspconfig.yamlls.setup({
+				capabilities = capabilities
+			})
 
 
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -82,14 +136,15 @@ return {
 					vim.keymap.set({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
 				end
 			})
-		vim.diagnostic.config({
-			virtual_text = {
-				prefix = "!",
-				format = function(diagnostic)
-					return string.format("%s (%s) [%s]", diagnostic.message, diagnostic.source, diagnostic.code or diagnostic.user_data.lsp.code)
-				end
-			}
-		})
+			vim.diagnostic.config({
+				virtual_text = {
+					prefix = "!",
+					format = function(diagnostic)
+						return string.format("%s (%s) [%s]", diagnostic.message, diagnostic.source, diagnostic.code)
+						-- return string.format("%s (%s) [%s]", diagnostic.message, diagnostic.source, diagnostic.code or diagnostic.user_data.lsp.code)
+					end
+				}
+			})
 		end
 	}
 }
