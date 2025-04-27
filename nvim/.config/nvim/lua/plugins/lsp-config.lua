@@ -4,7 +4,7 @@ return {
 		lazy = false,
 		config = function()
 			require("mason").setup()
-		end
+		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -36,10 +36,11 @@ return {
 					"sqls",
 					"vimls",
 					"hydra_lsp",
-					"yamlls"
-				}
+					"yamlls",
+				},
+				automatic_installation = true,
 			})
-		end
+		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -47,94 +48,108 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.awk_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.bashls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.ast_grep.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.clangd.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.harper_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.css_variables.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.cssls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.cssmodules_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.tailwindcss.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.unocss.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.docker_compose_language_service.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.dockerls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.html.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.lwc_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.superhtml.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.eslint.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.biome.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.ts_ls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
+				handlers = {
+					["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _, config)
+						if params.diagnostics ~= nil then
+							local idx = 1
+							while idx <= #params.diagnostics do
+								if params.diagnostics[idx].code == 80001 then
+									table.remove(params.diagnostics, idx)
+								else
+									idx = idx + 1
+								end
+							end
+							vim.lsp.diagnostic.on_publish_diagnostics(_, _, params, client_id, _, config)
+						end
+					end,
+				},
 			})
 			lspconfig.jsonls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.ruff.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.sqlls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.sqls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.vimls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.hydra_lsp.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 			lspconfig.yamlls.setup({
-				capabilities = capabilities
+				capabilities = capabilities,
 			})
 
-
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
-					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-					local opts = {buffer = ev.buf}
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+					local opts = { buffer = ev.buf }
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-					vim.keymap.set({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
-				end
+					vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+				end,
 			})
 			vim.diagnostic.config({
 				virtual_text = {
@@ -142,9 +157,9 @@ return {
 					format = function(diagnostic)
 						return string.format("%s (%s) [%s]", diagnostic.message, diagnostic.source, diagnostic.code)
 						-- return string.format("%s (%s) [%s]", diagnostic.message, diagnostic.source, diagnostic.code or diagnostic.user_data.lsp.code)
-					end
-				}
+					end,
+				},
 			})
-		end
-	}
+		end,
+	},
 }
