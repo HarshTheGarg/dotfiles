@@ -1,25 +1,13 @@
-return { 
-	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v3.x",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons",
-		"MunifTanjim/nui.nvim"
-	},
-	lazy = false,
-	config = function()
-		vim.keymap.set("n", "<leader>t", ":Neotree filesystem reveal left toggle<CR>")
-		require("neo-tree").setup({
-			filesystem = {
-				filtered_items = {
-					visible = true,
-					hide_dotfiles = false,
-					hide_gitignored = false,
-					never_show = {
-						"node_modules"
-					}
-				}
-			}
-		})
-	end
+return  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "nvim-tree/nvim-web-devicons", -- optional, but recommended
+    },
+    lazy = false, -- neo-tree will lazily load itself
+    config = function()
+        vim.keymap.set('n', '<C-n>', ':Neotree filesystem toggle left<CR>')
+    end
 }
