@@ -16,3 +16,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", {})
 vim.keymap.set("n", "<C-u>", "<C-u>zz", {})
 vim.keymap.set("n", "j", "jzz", {})
 vim.keymap.set("n", "k", "kzz", {})
+
+vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", {})
+vim.keymap.set("n", "<C-j>", ":wincmd h<Cj>", {})
+vim.keymap.set("n", "<C-k>", ":wincmd h<Ck>", {})
+vim.keymap.set("n", "<C-l>", ":wincmd h<Cl>", {})
